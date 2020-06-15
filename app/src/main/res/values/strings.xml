@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">AndroidProject</string>
+    <string name="CustomerName">Namn</string>
+    <string name="CustomerAge">Ålder</string>
+    <string name="ActiveCustomer">Aktiv kund</string>
+    <string name="ShowAll">Visa alla</string>
+    <string name="Add">Lägg till</string>
+    <string name="AboutApp">Om appen ...</string>
+    <string name="AboutText">Denna app är en övning, skapad av Peter Sundberg\ni kursen \'Android-utveckling\', inom utbildningen \'Java-utvecklare\'.</string>
+    <string name="ApiHeadline">Skapa API</string>
+    <string name="GetApi">Get</string>
+    <string name="PostApi">Post</string>
+    <string name="PutApi">Put</string>
+    <string name="DeleteApi">Delete</string>
+    <string name="APIResult">API result</string>
+
+</resources>
