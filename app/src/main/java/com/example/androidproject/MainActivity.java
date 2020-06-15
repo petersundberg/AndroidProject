@@ -176,14 +176,29 @@ public class MainActivity extends AppCompatActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.delete_item:
+
+
+                boolean status = dataBaseHelper.deleteOneCustomer((CustomerModel) customerArrayAdapter.getItem(info.position));
+                Toast.makeText(MainActivity.this, "Raderad: " + status, Toast.LENGTH_SHORT).show();
+                //updateViews();
+                //updateAutoCompView();
+                break;
+
+    }
                 customerArrayAdapter.remove(customerArrayAdapter.getItem(info.position));
-                return true;
+
+        return super.onContextItemSelected(item);
+
+
+
+
+//                return true;
 //            case R.id.edit_item:
 //                String itemValue = (String) customerArrayAdapter.getItem(info.position); //value to edit
 //                editSelectedItem(itemValue);
 //                return true;
-            default:
-                return super.onContextItemSelected(item);
+            //default:
+            //    return super.onContextItemSelected(item);
         }
     }
 
@@ -218,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
 //        outState.putParcelable("MY_LISTVIEW_STATE", lv_CustomerList.onSaveInstanceState());
 //    }
 
-}
+
 
 
 
