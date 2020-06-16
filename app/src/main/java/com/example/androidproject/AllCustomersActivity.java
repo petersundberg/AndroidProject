@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,25 +39,32 @@ public class AllCustomersActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_customers);
 
-            et_Name = findViewById(R.id.et_Name);
-            et_Age = findViewById(R.id.et_Age);
-            sw_Active = findViewById(R.id.sw_Active);
-            btn_ViewAll = findViewById(R.id.btn_ViewAll);
-            btn_Add = findViewById(R.id.btn_Add);
+//            et_Name = findViewById(R.id.et_Name);
+//            et_Age = findViewById(R.id.et_Age);
+//            sw_Active = findViewById(R.id.sw_Active);
+//            btn_ViewAll = findViewById(R.id.btn_ViewAll);
+//            btn_Add = findViewById(R.id.btn_Add);
             lv_CustomerList = findViewById(R.id.lv_CustomerList);
             registerForContextMenu(lv_CustomerList);   //register context menu to listView
 
-            dataBaseHelper = new DataBaseHelper(AllCustomersActivity.this);
-
-            customerArrayAdapter = new ArrayAdapter<CustomerModel>(AllCustomersActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.getAllCustomers());
-
+//            dataBaseHelper = new DataBaseHelper(AllCustomersActivity.this);
+//            customerArrayAdapter = new ArrayAdapter<CustomerModel>(AllCustomersActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.getAllCustomers());
 
 
+            //Create list of all customers on create
             dataBaseHelper = new DataBaseHelper(AllCustomersActivity.this);
             List<CustomerModel> allCustomers = dataBaseHelper.getAllCustomers();
             customerArrayAdapter = new ArrayAdapter<CustomerModel>(AllCustomersActivity.this, android.R.layout.simple_list_item_1, allCustomers);
             updateListData();
             //Toast.makeText(MainActivity.this, allCustomers.toString(), Toast.LENGTH_SHORT).show();
+
+
+            //Create list of all customers names on create
+            //dataBaseHelper = new DataBaseHelper(AllCustomersActivity.this);
+//            List<CustomerModel> customersName = dataBaseHelper.getAllCustomersName();
+//            customerArrayAdapter = new ArrayAdapter<CustomerModel>(AllCustomersActivity.this, android.R.layout.simple_list_item_1, customersName);
+//            updateListData();
+
 
 
 
@@ -71,41 +79,41 @@ public class AllCustomersActivity extends AppCompatActivity {
 
 
             //set listener on btn
-            btn_Add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    CustomerModel customerModel;
-
-                    try{
-                        customerModel = new CustomerModel(-1, et_Name.getText().toString(), Integer.parseInt(et_Age.getText().toString()), sw_Active.isChecked());
-                        //Toast.makeText(MainActivity.this, customerModel.toString(), Toast.LENGTH_SHORT).show();
-                    }
-                    catch (Exception e){
-                        Toast.makeText(AllCustomersActivity.this, "Error creating customer", Toast.LENGTH_SHORT).show();
-                        customerModel = new CustomerModel(-1, "Error", 0, false);
-                    }
-
-                    DataBaseHelper dataBaseHelper = new DataBaseHelper(AllCustomersActivity.this);
-
-                    boolean success = dataBaseHelper.addOne(customerModel);
-                    Toast.makeText(AllCustomersActivity.this, "Customer added: " + success, Toast.LENGTH_SHORT).show();
-                    customerArrayAdapter = new ArrayAdapter<CustomerModel>(AllCustomersActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.getAllCustomers());
-                    updateListData();
-
-                }
-            });
+//            btn_Add.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    CustomerModel customerModel;
+//
+//                    try{
+//                        customerModel = new CustomerModel(-1, et_Name.getText().toString(), Integer.parseInt(et_Age.getText().toString()), sw_Active.isChecked());
+//                        //Toast.makeText(MainActivity.this, customerModel.toString(), Toast.LENGTH_SHORT).show();
+//                    }
+//                    catch (Exception e){
+//                        Toast.makeText(AllCustomersActivity.this, "Error creating customer", Toast.LENGTH_SHORT).show();
+//                        customerModel = new CustomerModel(-1, "Error", 0, false);
+//                    }
+//
+//                    DataBaseHelper dataBaseHelper = new DataBaseHelper(AllCustomersActivity.this);
+//
+//                    boolean success = dataBaseHelper.addOne(customerModel);
+//                    Toast.makeText(AllCustomersActivity.this, "Customer added: " + success, Toast.LENGTH_SHORT).show();
+//                    customerArrayAdapter = new ArrayAdapter<CustomerModel>(AllCustomersActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.getAllCustomers());
+//                    updateListData();
+//
+//                }
+//            });
 
             //set listener on btn
-            btn_ViewAll.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dataBaseHelper = new DataBaseHelper(AllCustomersActivity.this);
-                    List<CustomerModel> allCustomers = dataBaseHelper.getAllCustomers();
-                    customerArrayAdapter = new ArrayAdapter<CustomerModel>(AllCustomersActivity.this, android.R.layout.simple_list_item_1, allCustomers);
-                    updateListData();
-                    //Toast.makeText(MainActivity.this, allCustomers.toString(), Toast.LENGTH_SHORT).show();
-                }
-            });
+//            btn_ViewAll.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    dataBaseHelper = new DataBaseHelper(AllCustomersActivity.this);
+//                    List<CustomerModel> allCustomers = dataBaseHelper.getAllCustomers();
+//                    customerArrayAdapter = new ArrayAdapter<CustomerModel>(AllCustomersActivity.this, android.R.layout.simple_list_item_1, allCustomers);
+//                    updateListData();
+//                    //Toast.makeText(MainActivity.this, allCustomers.toString(), Toast.LENGTH_SHORT).show();
+//                }
+//            });
 
 
 
@@ -139,6 +147,16 @@ public class AllCustomersActivity extends AppCompatActivity {
             customerArrayAdapter = new ArrayAdapter<CustomerModel>(this, android.R.layout.simple_list_item_1, dataBaseHelper.getAllCustomers());
             lv_CustomerList.setAdapter(customerArrayAdapter);
         }
+
+//    private void showCustomerOwnInfo() {
+//        customerArrayAdapter = new ArrayAdapter<CustomerModel>(this, android.R.layout.simple_list_item_1, dataBaseHelper.showCustomerOwnInfo());
+//        lv_CustomerList.setAdapter(customerArrayAdapter);
+//    }
+
+    private void getAllCustomersNameToListView() {
+        customerArrayAdapter = new ArrayAdapter<CustomerModel>(this, android.R.layout.simple_list_item_1, dataBaseHelper.getAllCustomersName());
+        lv_CustomerList.setAdapter(customerArrayAdapter);
+    }
 
 
 
@@ -191,6 +209,19 @@ public class AllCustomersActivity extends AppCompatActivity {
         public boolean onContextItemSelected(@NonNull MenuItem item) {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
             switch (item.getItemId()) {
+                case R.id.item_info:
+                    Intent intentItemInfo = new Intent(AllCustomersActivity.this, ItemInfoActivity.class);
+                    //intentItemInfo.putExtra("item_info", (Parcelable) info);
+                    startActivity(intentItemInfo);
+
+                    boolean status1 = dataBaseHelper.deleteOneCustomer((CustomerModel) customerArrayAdapter.getItem(info.position));
+                    Toast.makeText(AllCustomersActivity.this, "Info visas: " + status1, Toast.LENGTH_SHORT).show();
+                    //showCustomerOwnInfo();
+                    break;
+                //customerArrayAdapter.remove(customerArrayAdapter.getItem(info.position));
+                //updateAutoCompView();
+
+//--------------------------------------------
                 case R.id.delete_item:
                     boolean status = dataBaseHelper.deleteOneCustomer((CustomerModel) customerArrayAdapter.getItem(info.position));
                     Toast.makeText(AllCustomersActivity.this, "Raderad: " + status, Toast.LENGTH_SHORT).show();
@@ -200,7 +231,6 @@ public class AllCustomersActivity extends AppCompatActivity {
                 //updateAutoCompView();
 
 //--------------------------------------------
-
                 case R.id.edit_item:
                     //code to edit klicked customer
                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);

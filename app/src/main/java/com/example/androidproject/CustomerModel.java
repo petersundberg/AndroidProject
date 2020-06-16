@@ -20,6 +20,11 @@ public class CustomerModel {
     public CustomerModel() {
     }
 
+    public CustomerModel(String customerName) {
+        this.name = customerName;
+    }
+
+
     public int getId() {
         return id;
     }
