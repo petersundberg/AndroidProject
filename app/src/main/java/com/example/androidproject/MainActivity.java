@@ -84,11 +84,16 @@ public class MainActivity extends AppCompatActivity {
         btn_ViewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dataBaseHelper = new DataBaseHelper(MainActivity.this);
-                List<CustomerModel> allCustomers = dataBaseHelper.getAllCustomers();
-                customerArrayAdapter = new ArrayAdapter<CustomerModel>(MainActivity.this, android.R.layout.simple_list_item_1, allCustomers);
-                updateListData();
-                //Toast.makeText(MainActivity.this, allCustomers.toString(), Toast.LENGTH_SHORT).show();
+
+                Intent intentViewAllCustomers = new Intent(MainActivity.this, AllCustomersActivity.class); /////////////////////////////////////
+                startActivity(intentViewAllCustomers);
+
+
+//                dataBaseHelper = new DataBaseHelper(MainActivity.this);
+//                List<CustomerModel> allCustomers = dataBaseHelper.getAllCustomers();
+//                customerArrayAdapter = new ArrayAdapter<CustomerModel>(MainActivity.this, android.R.layout.simple_list_item_1, allCustomers);
+//                updateListData();
+//                //Toast.makeText(MainActivity.this, allCustomers.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 

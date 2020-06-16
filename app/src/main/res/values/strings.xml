@@ -14,5 +14,11 @@
     <string name="DeleteApi">Delete</string>
     <string name="APIResult">API result</string>
     <string name="UpdateCustomer">Uppdatera kund</string>
+    <string name="AddUser">Lägg till kund</string>
+    <string name="ViewAllCustomers">Visa alla kunder</string>
+    <string name="Api">API</string>
+    <string name="AboutThisApp">Om denna app</string>
+    <string name="Welcome">Välkommen</string>
+    <string name="WhatToDo">Vad vill du göra?</string>
 
 </resources>
