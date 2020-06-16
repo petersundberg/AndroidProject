@@ -57,7 +57,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
     //show selected customer's info from database
-    public boolean showCustomerOwnInfo(CustomerModel customerModel){
+    public boolean showCustomerInfo(CustomerModel customerModel){
         SQLiteDatabase db = this.getReadableDatabase();
         String queryString = "SELECT FROM " + CUSTOMER_TABLE + " WHERE " + COLUMN_CUSTOMER_NAME + " = " + customerModel.getName();
         Cursor cursor = db.rawQuery(queryString, null);
@@ -181,7 +181,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
 
-// String custName = newCustomer.getName();
+
 
 
 

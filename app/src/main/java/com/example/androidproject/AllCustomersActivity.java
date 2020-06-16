@@ -148,15 +148,18 @@ public class AllCustomersActivity extends AppCompatActivity {
             lv_CustomerList.setAdapter(customerArrayAdapter);
         }
 
-//    private void showCustomerOwnInfo() {
-//        customerArrayAdapter = new ArrayAdapter<CustomerModel>(this, android.R.layout.simple_list_item_1, dataBaseHelper.showCustomerOwnInfo());
-//        lv_CustomerList.setAdapter(customerArrayAdapter);
-//    }
 
-    private void getAllCustomersNameToListView() {
-        customerArrayAdapter = new ArrayAdapter<CustomerModel>(this, android.R.layout.simple_list_item_1, dataBaseHelper.getAllCustomersName());
-        lv_CustomerList.setAdapter(customerArrayAdapter);
-    }
+//        private void showCustomerInfo() {
+//            customerArrayAdapter = new ArrayAdapter<CustomerModel>(this, android.R.layout.simple_list_item_1, dataBaseHelper.showCustomerInfo());
+//            lv_CustomerList.setAdapter(customerArrayAdapter);
+//        }
+
+
+        private void getAllCustomersNameToListView() {
+            customerArrayAdapter = new ArrayAdapter<CustomerModel>(this, android.R.layout.simple_list_item_1, dataBaseHelper.getAllCustomersName());
+            lv_CustomerList.setAdapter(customerArrayAdapter);
+        }
+
 
 
 
@@ -210,14 +213,21 @@ public class AllCustomersActivity extends AppCompatActivity {
             AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
             switch (item.getItemId()) {
                 case R.id.item_info:
+
+                    boolean status1 = dataBaseHelper.showCustomerInfo((CustomerModel) customerArrayAdapter.getItem(info.position));
+                    Toast.makeText(AllCustomersActivity.this, "Visar info: " + status1, Toast.LENGTH_SHORT).show();
+//                    //showCust();
+//                    break;
+
                     Intent intentItemInfo = new Intent(AllCustomersActivity.this, ItemInfoActivity.class);
-                    //intentItemInfo.putExtra("item_info", (Parcelable) info);
+                    intentItemInfo.putExtra("item_info", (Parcelable) info);
                     startActivity(intentItemInfo);
 
-                    boolean status1 = dataBaseHelper.deleteOneCustomer((CustomerModel) customerArrayAdapter.getItem(info.position));
-                    Toast.makeText(AllCustomersActivity.this, "Info visas: " + status1, Toast.LENGTH_SHORT).show();
+
+//                    boolean status1 = dataBaseHelper.showCustomerInfo((CustomerModel) customerArrayAdapter.getItem(info.position));
+//                    Toast.makeText(AllCustomersActivity.this, "Info visas: " + status1, Toast.LENGTH_SHORT).show();
                     //showCustomerOwnInfo();
-                    break;
+                   // break;
                 //customerArrayAdapter.remove(customerArrayAdapter.getItem(info.position));
                 //updateAutoCompView();
 
