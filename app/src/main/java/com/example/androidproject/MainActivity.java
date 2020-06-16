@@ -1,14 +1,14 @@
 package com.example.androidproject;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,14 +25,14 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     //private static String MY_LISTVIEW_STATE = "LISTVIEW_STATE";
-    EditText et_Name;
-    EditText et_Age;
-    Switch sw_Active;
-    Button btn_ViewAll;
-    Button btn_Add;
-    ListView lv_CustomerList;
-    ArrayAdapter customerArrayAdapter;
-    DataBaseHelper dataBaseHelper;
+    private EditText et_Name;
+    private EditText et_Age;
+    private Switch sw_Active;
+    private Button btn_ViewAll;
+    private Button btn_Add;
+    private ListView lv_CustomerList;
+    private ArrayAdapter customerArrayAdapter;
+    private DataBaseHelper dataBaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,10 +120,11 @@ public class MainActivity extends AppCompatActivity {
         lv_CustomerList.setAdapter(customerArrayAdapter);
     }
 
-    private void showCustomersOnListView(DataBaseHelper dataBaseHelper2) {
-        customerArrayAdapter = new ArrayAdapter<CustomerModel>(MainActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper2.getAllCustomers());
-        updateListData();
+    private void showCustomersOnListView() {
+        customerArrayAdapter = new ArrayAdapter<CustomerModel>(this, android.R.layout.simple_list_item_1, dataBaseHelper.getAllCustomers());
+        lv_CustomerList.setAdapter(customerArrayAdapter);
     }
+
 
 
     //ActionBar menu in Main
@@ -170,26 +171,99 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.context_menu, menu);
     }
 
-    //Create action to perform on each item in list
+    //Create action to perform on each clicked item in list (context menu)
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.delete_item:
-
-
                 boolean status = dataBaseHelper.deleteOneCustomer((CustomerModel) customerArrayAdapter.getItem(info.position));
                 Toast.makeText(MainActivity.this, "Raderad: " + status, Toast.LENGTH_SHORT).show();
-                //updateViews();
-                //updateAutoCompView();
+                showCustomersOnListView();
                 break;
+                //customerArrayAdapter.remove(customerArrayAdapter.getItem(info.position));
+                //updateAutoCompView();
+
+//--------------------------------------------
+
+            case R.id.edit_item:
+                //code to edit klicked customer
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+
+                LayoutInflater inflater = getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.edit_dialog,null);
+
+                dialogBuilder.setView(dialogView);
+
+                //Declare  variables
+                final EditText dialog_edit_name, dialog_edit_age;
+                final Switch dialog_sw_active;
+                Button dialog_btn_update;
+
+                //initiate Views
+                dialog_edit_name = dialogView.findViewById(R.id.dialog_edit_name);
+                dialog_edit_age = dialogView.findViewById(R.id.dialog_edit_age);
+                dialog_sw_active = dialogView.findViewById(R.id.dialog_sw_active);
+                dialog_btn_update = dialogView.findViewById(R.id.dialog_btn_update);
+
+                final CustomerModel tempCustomer = (CustomerModel) customerArrayAdapter.getItem(info.position);
+
+
+//-------------------------------------------------------------------
+                //Setters for current values
+                dialog_edit_name.setText(tempCustomer.getName());
+
+//-------------------------------------------------------------------
+
+
+                //int ageVal = Integer.parseInt(tempCustomer.getAge().toString());
+
+                //int ageVal = Integer.parseInt(dialog_edit_age.getText().toString());
+
+                //int ageValue = Integer.parseInt(tempCustomer.getAge().toString());
+
+                //String string_Age = dialog_edit_age.getText().toString();
+                //int int_Age = Integer.parseInt(string_Age);
+                //dialog_edit_age.setText(int_Age);
+
+
+
+                //dialog_edit_age.setText(tempCustomer.getAge());     //dialog_edit_age.setText(tempCustomer.getAge());
+
+//---------------------------------------
+
+                dialog_sw_active.setChecked(tempCustomer.isActive());
+
+
+                final AlertDialog updateDialog = dialogBuilder.create();
+                updateDialog.show();
+
+                dialog_btn_update.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        tempCustomer.setName(dialog_edit_name.getText().toString());
+
+                        //parse age int to string
+                        int ageValue = Integer.parseInt(dialog_edit_age.getText().toString());
+                        tempCustomer.setAge(ageValue);  //age as String
+                        tempCustomer.setActive(dialog_sw_active.isChecked());
+
+                        dataBaseHelper.updateCustomer(tempCustomer);
+                        Toast.makeText(MainActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                        showCustomersOnListView();
+
+                        updateDialog.hide();
+                        //updateAutoCompView();
+                    }
+                });
+
+//-----------------------------
+
+
 
     }
-                customerArrayAdapter.remove(customerArrayAdapter.getItem(info.position));
-
         return super.onContextItemSelected(item);
-
-
 
 
 //                return true;
@@ -199,10 +273,14 @@ public class MainActivity extends AppCompatActivity {
 //                return true;
             //default:
             //    return super.onContextItemSelected(item);
+
+
+
+
+
+
         }
     }
-
-
 
 
 
@@ -219,11 +297,6 @@ public class MainActivity extends AppCompatActivity {
 //            Toast.makeText(MainActivity.this, "Deleted: " + customerClicked.toString(), Toast.LENGTH_SHORT).show();
 //        }
 //    });
-
-
-
-
-
 
 
 

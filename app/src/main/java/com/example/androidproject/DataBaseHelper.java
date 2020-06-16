@@ -56,7 +56,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-    //delete one customer from database, using DAO
+    //delete one customer from database
     public boolean deleteOneCustomer(CustomerModel customerModel){
         SQLiteDatabase db = this.getWritableDatabase();
         String queryString = "DELETE FROM " + CUSTOMER_TABLE + " WHERE " + COLUMN_ID + " = " + customerModel.getId();
@@ -70,9 +70,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
+
+    public void updateCustomer(CustomerModel customerToUpdate){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_ID,customerToUpdate.getId());
+        cv.put(COLUMN_CUSTOMER_NAME,customerToUpdate.getName());
+        cv.put(COLUMN_CUSTOMER_AGE, customerToUpdate.getAge());
+        cv.put(COLUMN_ACTIVE_CUSTOMER, customerToUpdate.isActive());
+
+        db.update(CUSTOMER_TABLE,cv,COLUMN_ID + " = " + customerToUpdate.getId(),null);
+
+    }
+
+
     //create list out of all customers
     public List<CustomerModel> getAllCustomers(){
-
         List<CustomerModel> returnList = new ArrayList<>();
 
         //get data from database

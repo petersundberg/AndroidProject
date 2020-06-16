@@ -54,7 +54,7 @@ public class CustomerModel {
 
     @Override
     public String toString() {
-        return "Kund, ID: " + id + ", namn: " + name + ", ålder: " + age + " år.";
+        return "Kund, ID: " + id + ", namn: " + name + ", ålder: " + age + " år," + " aktiv: " + isActive;
 
 //    @Override
 //    public String toString() {

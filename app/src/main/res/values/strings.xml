@@ -13,5 +13,6 @@
     <string name="PutApi">Put</string>
     <string name="DeleteApi">Delete</string>
     <string name="APIResult">API result</string>
+    <string name="UpdateCustomer">Uppdatera kund</string>
 
 </resources>
