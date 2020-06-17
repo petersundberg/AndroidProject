@@ -168,6 +168,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+}
+
     //create context menu
 //    @Override
 //    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -270,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
 
-    }
+//    }
 
 
 

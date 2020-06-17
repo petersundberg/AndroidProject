@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public class ItemInfoActivity extends AppCompatActivity {
 
     private ListView lv_CustomerList;
+    private TextView tv_itemInfo;
     private ArrayAdapter customerArrayAdapter;
     private DataBaseHelper dataBaseHelper;
 
@@ -23,12 +25,18 @@ public class ItemInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_info);
 
-        lv_CustomerList = findViewById(R.id.lv_CustomerList);
-        registerForContextMenu(lv_CustomerList);   //register context menu to listView
+//        lv_CustomerList = findViewById(R.id.lv_CustomerList);
+//        registerForContextMenu(lv_CustomerList);   //register context menu to listView
+
+
 
         //recieveTextView = findViewById(R.id.recieveTextView);
         Intent recieveIntent = getIntent();
-        Parcelable[] itemInfo = recieveIntent.getParcelableArrayExtra("item_info");  //String text = recieveIntent.getStringExtra("item_info"); //String text = recieveIntent.getStringExtra("DATA");
+        String name = recieveIntent.getStringExtra("name");
+        Toast.makeText(this, "info for: " + name, Toast.LENGTH_SHORT).show();
+        //tv_itemInfo = findViewById(R.id.tv_itemInfo);
+        //tv_itemInfo.setText("ID: " + itemInfo);
+        //Parcelable[] itemInfo = recieveIntent.getParcelableArrayExtra("item_info");  //String text = recieveIntent.getStringExtra("item_info"); //String text = recieveIntent.getStringExtra("DATA");
         //lv_CustomerList.setText(itemInfo);
 //        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 

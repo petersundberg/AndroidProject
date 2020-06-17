@@ -22,5 +22,7 @@
     <string name="WhatToDo">Vad vill du göra?</string>
     <string name="AllCustomers">Alla kunder</string>
     <string name="ItemInfo">Kundinfo</string>
+    <string name="ItemInfoShow">Info kund</string>
+    <string name="Avatar">avatar</string>
 
 </resources>

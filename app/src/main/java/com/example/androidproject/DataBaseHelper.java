@@ -57,17 +57,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
     //show selected customer's info from database
-    public boolean showCustomerInfo(CustomerModel customerModel){
+    public CustomerModel showCustomerInfo(CustomerModel customerModel){
         SQLiteDatabase db = this.getReadableDatabase();
-        String queryString = "SELECT FROM " + CUSTOMER_TABLE + " WHERE " + COLUMN_CUSTOMER_NAME + " = " + customerModel.getName();
+        String queryString = "SELECT * FROM " + CUSTOMER_TABLE + " WHERE " + COLUMN_ID + " = " + customerModel.getId();
         Cursor cursor = db.rawQuery(queryString, null);
 
+        CustomerModel foundCustomer = new CustomerModel();
         if(cursor.moveToFirst()){
-            return true;
+
+            do{
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                int age = cursor.getInt(2);
+                boolean active = cursor.getInt(3) == 1 ? true:false;
+
+                foundCustomer = new CustomerModel(id,name,age,active);
+
+            }while(cursor.moveToNext());
+
+             return foundCustomer;
         }
-        else{
-            return false;
-        }
+        return foundCustomer;
     }
 
     //delete one customer from database
@@ -77,10 +87,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(queryString, null);
 
         if(cursor.moveToFirst()){
-            return true;
+            return false;
         }
         else{
-            return false;
+            return true;
         }
     }
 
@@ -175,6 +185,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
+
+    //Hämta user via id
 
 
 }

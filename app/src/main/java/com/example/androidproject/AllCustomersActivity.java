@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.util.List;
 
@@ -200,6 +201,7 @@ public class AllCustomersActivity extends AppCompatActivity {
             startActivity(intentAPI);
         }
 
+
         //create context menu
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
@@ -210,18 +212,50 @@ public class AllCustomersActivity extends AppCompatActivity {
         //Create action to perform on each clicked item in list (context menu)
         @Override
         public boolean onContextItemSelected(@NonNull MenuItem item) {
-            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+            final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
             switch (item.getItemId()) {
+
                 case R.id.item_info:
+                    //Toast.makeText(AllCustomersActivity.this, "Visar info: " + dataBaseHelper, Toast.LENGTH_SHORT).show();
+                    //final AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener(){
 
-                    boolean status1 = dataBaseHelper.showCustomerInfo((CustomerModel) customerArrayAdapter.getItem(info.position));
-                    Toast.makeText(AllCustomersActivity.this, "Visar info: " + status1, Toast.LENGTH_SHORT).show();
-//                    //showCust();
-//                    break;
+                    CustomerModel customer = dataBaseHelper.showCustomerInfo((CustomerModel) customerArrayAdapter.getItem(info.position));
 
-                    Intent intentItemInfo = new Intent(AllCustomersActivity.this, ItemInfoActivity.class);
-                    intentItemInfo.putExtra("item_info", (Parcelable) info);
-                    startActivity(intentItemInfo);
+                    Intent itemIntent = new Intent(AllCustomersActivity.this, ItemInfoActivity.class);
+                    itemIntent.putExtra("name",  customer.getName());
+
+                    startActivity(itemIntent);
+                    Toast.makeText(this, "Opened", Toast.LENGTH_SHORT).show();
+
+
+
+
+//                final AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener(){
+//
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                        Intent i = new Intent(AllCustomersActivity.this, ItemInfoActivity.class);
+//                        i.putExtra("itemInfoIntent", String.valueOf(lv_CustomerList.getItemAtPosition(0)));
+//                        startActivity(i);
+//                    }
+//                };
+
+
+
+
+
+
+
+//                    boolean status1 = dataBaseHelper.showCustomerInfo((CustomerModel) customerArrayAdapter.getItem(info.position));
+//                    Toast.makeText(AllCustomersActivity.this, "Visar info: " + status1, Toast.LENGTH_SHORT).show();
+////                    //showCust();
+////                    break;
+//
+//                    Intent intentItemInfo = new Intent(AllCustomersActivity.this, ItemInfoActivity.class);
+//                    intentItemInfo.putExtra("item_info", (Parcelable) info);
+//                    startActivity(intentItemInfo);
+
+
 
 
 //                    boolean status1 = dataBaseHelper.showCustomerInfo((CustomerModel) customerArrayAdapter.getItem(info.position));
@@ -230,7 +264,7 @@ public class AllCustomersActivity extends AppCompatActivity {
                    // break;
                 //customerArrayAdapter.remove(customerArrayAdapter.getItem(info.position));
                 //updateAutoCompView();
-
+                break;
 //--------------------------------------------
                 case R.id.delete_item:
                     boolean status = dataBaseHelper.deleteOneCustomer((CustomerModel) customerArrayAdapter.getItem(info.position));
@@ -267,7 +301,7 @@ public class AllCustomersActivity extends AppCompatActivity {
 //-------------------------------------------------------------------
                     //Setters for current values
                     dialog_edit_name.setText(tempCustomer.getName());
-
+                    dialog_edit_age.setText(String.valueOf(tempCustomer.getAge()));
 //-------------------------------------------------------------------
 
 
@@ -335,6 +369,9 @@ public class AllCustomersActivity extends AppCompatActivity {
 
 
         }
+
+
+
     }
 
 

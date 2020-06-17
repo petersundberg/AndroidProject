@@ -43,10 +43,9 @@ public class StartActivity extends AppCompatActivity {
         btn_api.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                apiActivity();
+                gotoApi();
             }
         });
-
 
         btn_about.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,23 +54,19 @@ public class StartActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
-
-
     public void addCustomer(){
-        Intent intentAddCustomer = new Intent(StartActivity.this, MainActivity.class); /////////////////////////////////////
+        Intent intentAddCustomer = new Intent(StartActivity.this, MainActivity.class);
         startActivity(intentAddCustomer);
     }
 
-
     public void viewAllCustomers(){
-        Intent intentViewAllCustomers = new Intent(StartActivity.this, AllCustomersActivity.class); /////////////////////////////////////
+        Intent intentViewAllCustomers = new Intent(StartActivity.this, AllCustomersActivity.class);
         startActivity(intentViewAllCustomers);
     }
 
-    public void apiActivity(){
+    public void gotoApi(){
         Toast.makeText(this, "Skapa API ...", Toast.LENGTH_SHORT).show();
         Intent intentAPI = new Intent(StartActivity.this, ApiActivity.class);
         startActivity(intentAPI);
