@@ -24,5 +24,12 @@
     <string name="ItemInfo">Kundinfo</string>
     <string name="ItemInfoShow">Info kund</string>
     <string name="Avatar">avatar</string>
+    <string name="NameLabel">Namn:</string>
+    <string name="AgeLabel">Ålder:</string>
+    <string name="ActiveLabel">Aktiv:</string>
+    <string name="InfoActive">Aktiv:</string>
+    <string name="Name">Namn</string>
+    <string name="Age">Ålder</string>
+    <string name="Active">Aktiv</string>
 
 </resources>

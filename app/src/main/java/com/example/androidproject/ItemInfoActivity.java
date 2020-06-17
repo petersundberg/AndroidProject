@@ -20,6 +20,10 @@ public class ItemInfoActivity extends AppCompatActivity {
     private ArrayAdapter customerArrayAdapter;
     private DataBaseHelper dataBaseHelper;
 
+    private TextView tv_name;
+    private TextView tv_age;
+    private TextView tv_active;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,13 +31,26 @@ public class ItemInfoActivity extends AppCompatActivity {
 
 //        lv_CustomerList = findViewById(R.id.lv_CustomerList);
 //        registerForContextMenu(lv_CustomerList);   //register context menu to listView
+        tv_name = findViewById(R.id.tv_name);
+        tv_age = findViewById(R.id.tv_age);
+        tv_active = findViewById(R.id.tv_active);
 
 
 
         //recieveTextView = findViewById(R.id.recieveTextView);
-        Intent recieveIntent = getIntent();
-        String name = recieveIntent.getStringExtra("name");
+        Intent itemIntent = getIntent();
+        String name = itemIntent.getStringExtra("name");
+        int ageInt = itemIntent.getIntExtra("age", 0);  //String age = itemIntent.getStringExtra("age");
+        boolean active = getIntent().getExtras().getBoolean("active");  //String active = itemIntent.getStringExtra("active");    //String active = itemIntent.getStringExtra("active");
+
+        tv_name.setText(name);
+        tv_age.setText(String.valueOf(ageInt));    //tv_age.setText(String.valueOf(age));
+        tv_active.setText(String.valueOf(active));
+
+
         Toast.makeText(this, "info for: " + name, Toast.LENGTH_SHORT).show();
+
+
         //tv_itemInfo = findViewById(R.id.tv_itemInfo);
         //tv_itemInfo.setText("ID: " + itemInfo);
         //Parcelable[] itemInfo = recieveIntent.getParcelableArrayExtra("item_info");  //String text = recieveIntent.getStringExtra("item_info"); //String text = recieveIntent.getStringExtra("DATA");

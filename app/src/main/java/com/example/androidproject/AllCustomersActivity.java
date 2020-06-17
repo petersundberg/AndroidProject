@@ -221,11 +221,15 @@ public class AllCustomersActivity extends AppCompatActivity {
 
                     CustomerModel customer = dataBaseHelper.showCustomerInfo((CustomerModel) customerArrayAdapter.getItem(info.position));
 
+                    Toast.makeText(this, "Opened", Toast.LENGTH_SHORT).show();
+
                     Intent itemIntent = new Intent(AllCustomersActivity.this, ItemInfoActivity.class);
                     itemIntent.putExtra("name",  customer.getName());
+                    itemIntent.putExtra("age",  customer.getAge());
+                    itemIntent.putExtra("active",  customer.isActive());
 
                     startActivity(itemIntent);
-                    Toast.makeText(this, "Opened", Toast.LENGTH_SHORT).show();
+
 
 
 
