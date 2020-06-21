@@ -40,16 +40,8 @@ public class AllCustomersActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_customers);
 
-//            et_Name = findViewById(R.id.et_Name);
-//            et_Age = findViewById(R.id.et_Age);
-//            sw_Active = findViewById(R.id.sw_Active);
-//            btn_ViewAll = findViewById(R.id.btn_ViewAll);
-//            btn_Add = findViewById(R.id.btn_Add);
             lv_CustomerList = findViewById(R.id.lv_CustomerList);
             registerForContextMenu(lv_CustomerList);   //register context menu to listView
-
-//            dataBaseHelper = new DataBaseHelper(AllCustomersActivity.this);
-//            customerArrayAdapter = new ArrayAdapter<CustomerModel>(AllCustomersActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.getAllCustomers());
 
 
             //Create list of all customers on create
@@ -59,91 +51,14 @@ public class AllCustomersActivity extends AppCompatActivity {
             updateListData();
             //Toast.makeText(MainActivity.this, allCustomers.toString(), Toast.LENGTH_SHORT).show();
 
-
-            //Create list of all customers names on create
-            //dataBaseHelper = new DataBaseHelper(AllCustomersActivity.this);
-//            List<CustomerModel> customersName = dataBaseHelper.getAllCustomersName();
-//            customerArrayAdapter = new ArrayAdapter<CustomerModel>(AllCustomersActivity.this, android.R.layout.simple_list_item_1, customersName);
-//            updateListData();
-
-
-
-
-
-
-
-
-
-
-            //method used to show all customers from database in the listview
-            //showCustomersOnListView(dataBaseHelper);
-
-
-            //set listener on btn
-//            btn_Add.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    CustomerModel customerModel;
-//
-//                    try{
-//                        customerModel = new CustomerModel(-1, et_Name.getText().toString(), Integer.parseInt(et_Age.getText().toString()), sw_Active.isChecked());
-//                        //Toast.makeText(MainActivity.this, customerModel.toString(), Toast.LENGTH_SHORT).show();
-//                    }
-//                    catch (Exception e){
-//                        Toast.makeText(AllCustomersActivity.this, "Error creating customer", Toast.LENGTH_SHORT).show();
-//                        customerModel = new CustomerModel(-1, "Error", 0, false);
-//                    }
-//
-//                    DataBaseHelper dataBaseHelper = new DataBaseHelper(AllCustomersActivity.this);
-//
-//                    boolean success = dataBaseHelper.addOne(customerModel);
-//                    Toast.makeText(AllCustomersActivity.this, "Customer added: " + success, Toast.LENGTH_SHORT).show();
-//                    customerArrayAdapter = new ArrayAdapter<CustomerModel>(AllCustomersActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.getAllCustomers());
-//                    updateListData();
-//
-//                }
-//            });
-
-            //set listener on btn
-//            btn_ViewAll.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    dataBaseHelper = new DataBaseHelper(AllCustomersActivity.this);
-//                    List<CustomerModel> allCustomers = dataBaseHelper.getAllCustomers();
-//                    customerArrayAdapter = new ArrayAdapter<CustomerModel>(AllCustomersActivity.this, android.R.layout.simple_list_item_1, allCustomers);
-//                    updateListData();
-//                    //Toast.makeText(MainActivity.this, allCustomers.toString(), Toast.LENGTH_SHORT).show();
-//                }
-//            });
-
-
-
-
-            //set listener on item in listView
-//        lv_CustomerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                CustomerModel customerClicked = (CustomerModel) parent.getItemAtPosition(position);
-//                dataBaseHelper.deleteOneCustomer(customerClicked);
-//                showCustomersOnListView(dataBaseHelper);
-//                Toast.makeText(MainActivity.this, "Deleted: " + customerClicked.toString(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-
-
-//        if(savedInstanceState!=null) {
-//            listViewState = savedInstanceState.getParcelable(MY_LISTVIEW_STATE);
-//        }
-
         }
 
-
-
+        //update list
         private void updateListData() {
             lv_CustomerList.setAdapter(customerArrayAdapter);
         }
 
+        //get all customers and show in listview
         private void showCustomersOnListView() {
             customerArrayAdapter = new ArrayAdapter<CustomerModel>(this, android.R.layout.simple_list_item_1, dataBaseHelper.getAllCustomers());
             lv_CustomerList.setAdapter(customerArrayAdapter);
@@ -163,8 +78,7 @@ public class AllCustomersActivity extends AppCompatActivity {
 
 
 
-
-        //ActionBar menu in Main
+        //create ActionBar menu in activity
         @Override
         public boolean onCreateOptionsMenu(Menu menu) {
             getMenuInflater().inflate(R.menu.action_bar_menu, menu);
@@ -189,12 +103,12 @@ public class AllCustomersActivity extends AppCompatActivity {
         }
 
 
-
-
+        //show About activity
         public void aboutApp(){
             Intent intentAboutApp = new Intent(AllCustomersActivity.this, AboutActivity.class);
             startActivity(intentAboutApp);
         }
+        //show activity to create API
         public void createAPI(){
             Toast.makeText(this, "Skapa API ...", Toast.LENGTH_SHORT).show();
             Intent intentAPI = new Intent(AllCustomersActivity.this, ApiActivity.class);
@@ -221,66 +135,27 @@ public class AllCustomersActivity extends AppCompatActivity {
 
                     CustomerModel customer = dataBaseHelper.showCustomerInfo((CustomerModel) customerArrayAdapter.getItem(info.position));
 
-                    Toast.makeText(this, "Opened", Toast.LENGTH_SHORT).show();
-
                     Intent itemIntent = new Intent(AllCustomersActivity.this, ItemInfoActivity.class);
                     itemIntent.putExtra("name",  customer.getName());
                     itemIntent.putExtra("age",  customer.getAge());
                     itemIntent.putExtra("active",  customer.isActive());
 
                     startActivity(itemIntent);
-
-
-
-
-
-//                final AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener(){
-//
-//                    @Override
-//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        Intent i = new Intent(AllCustomersActivity.this, ItemInfoActivity.class);
-//                        i.putExtra("itemInfoIntent", String.valueOf(lv_CustomerList.getItemAtPosition(0)));
-//                        startActivity(i);
-//                    }
-//                };
-
-
-
-
-
-
-
-//                    boolean status1 = dataBaseHelper.showCustomerInfo((CustomerModel) customerArrayAdapter.getItem(info.position));
-//                    Toast.makeText(AllCustomersActivity.this, "Visar info: " + status1, Toast.LENGTH_SHORT).show();
-////                    //showCust();
-////                    break;
-//
-//                    Intent intentItemInfo = new Intent(AllCustomersActivity.this, ItemInfoActivity.class);
-//                    intentItemInfo.putExtra("item_info", (Parcelable) info);
-//                    startActivity(intentItemInfo);
-
-
-
-
-//                    boolean status1 = dataBaseHelper.showCustomerInfo((CustomerModel) customerArrayAdapter.getItem(info.position));
-//                    Toast.makeText(AllCustomersActivity.this, "Info visas: " + status1, Toast.LENGTH_SHORT).show();
-                    //showCustomerOwnInfo();
-                   // break;
-                //customerArrayAdapter.remove(customerArrayAdapter.getItem(info.position));
-                //updateAutoCompView();
                 break;
 //--------------------------------------------
+                //delete chosen item
                 case R.id.delete_item:
+                    //delete chosen customer
                     boolean status = dataBaseHelper.deleteOneCustomer((CustomerModel) customerArrayAdapter.getItem(info.position));
-                    Toast.makeText(AllCustomersActivity.this, "Raderad: " + status, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AllCustomersActivity.this, "Kund borttagen: " + status, Toast.LENGTH_SHORT).show();
                     showCustomersOnListView();
                     break;
                 //customerArrayAdapter.remove(customerArrayAdapter.getItem(info.position));
                 //updateAutoCompView();
 
 //--------------------------------------------
+                //edit chosen item
                 case R.id.edit_item:
-                    //code to edit klicked customer
                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
 
                     LayoutInflater inflater = getLayoutInflater();
@@ -301,32 +176,11 @@ public class AllCustomersActivity extends AppCompatActivity {
 
                     final CustomerModel tempCustomer = (CustomerModel) customerArrayAdapter.getItem(info.position);
 
-
-//-------------------------------------------------------------------
                     //Setters for current values
                     dialog_edit_name.setText(tempCustomer.getName());
                     dialog_edit_age.setText(String.valueOf(tempCustomer.getAge()));
-//-------------------------------------------------------------------
-
-
-                    //int ageVal = Integer.parseInt(tempCustomer.getAge().toString());
-
-                    //int ageVal = Integer.parseInt(dialog_edit_age.getText().toString());
-
-                    //int ageValue = Integer.parseInt(tempCustomer.getAge().toString());
-
-                    //String string_Age = dialog_edit_age.getText().toString();
-                    //int int_Age = Integer.parseInt(string_Age);
-                    //dialog_edit_age.setText(int_Age);
-
-
-
-                    //dialog_edit_age.setText(tempCustomer.getAge());     //dialog_edit_age.setText(tempCustomer.getAge());
-
-//---------------------------------------
 
                     dialog_sw_active.setChecked(tempCustomer.isActive());
-
 
                     final AlertDialog updateDialog = dialogBuilder.create();
                     updateDialog.show();
@@ -351,64 +205,12 @@ public class AllCustomersActivity extends AppCompatActivity {
                         }
                     });
 
-//-----------------------------
-
-
-
             }
             return super.onContextItemSelected(item);
 
-
-//                return true;
-//            case R.id.edit_item:
-//                String itemValue = (String) customerArrayAdapter.getItem(info.position); //value to edit
-//                editSelectedItem(itemValue);
-//                return true;
-            //default:
-            //    return super.onContextItemSelected(item);
-
-
-
-
-
-
         }
 
-
-
     }
-
-
-
-
-
-
-//    //set listener on item in listView
-//        lv_CustomerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//        @Override
-//        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            CustomerModel customerClicked = (CustomerModel) parent.getItemAtPosition(position);
-//            dataBaseHelper.deleteOneCustomer(customerClicked);
-//            showCustomersOnListView(dataBaseHelper);
-//            Toast.makeText(MainActivity.this, "Deleted: " + customerClicked.toString(), Toast.LENGTH_SHORT).show();
-//        }
-//    });
-
-
-
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putParcelable("MY_LISTVIEW_STATE", lv_CustomerList.onSaveInstanceState());
-//    }
-
-
-
-
-
-
-
-
 
 
 

@@ -6,18 +6,18 @@
     <string name="ShowAll">Visa alla</string>
     <string name="Add">Lägg till</string>
     <string name="AboutApp">Om appen ...</string>
-    <string name="AboutText">Denna app är en övning, skapad av Peter Sundberg\ni kursen \'Android-utveckling\', inom utbildningen \'Java-utvecklare\'.</string>
+    <string name="AboutText">Skapad av: Peter Sundberg\n\nKurs: Android-utveckling\n\nUtbildning: Java-utvecklare\n\nUtb. företag: EC Utbildning\n\nSäte: Växjö</string>
     <string name="ApiHeadline">Skapa API</string>
     <string name="GetApi">Get</string>
     <string name="PostApi">Post</string>
     <string name="PutApi">Put</string>
     <string name="DeleteApi">Delete</string>
-    <string name="APIResult">API result</string>
+    <string name="APIResult">API resultat visas här</string>
     <string name="UpdateCustomer">Uppdatera kund</string>
     <string name="AddUser">Lägg till kund</string>
     <string name="ViewAllCustomers">Visa alla kunder</string>
     <string name="Api">API</string>
-    <string name="AboutThisApp">Om denna app</string>
+    <string name="AboutTheApp">Om denna app</string>
     <string name="Welcome">Välkommen</string>
     <string name="WhatToDo">Vad vill du göra?</string>
     <string name="AllCustomers">Alla kunder</string>
@@ -31,5 +31,10 @@
     <string name="Name">Namn</string>
     <string name="Age">Ålder</string>
     <string name="Active">Aktiv</string>
+    <string name="AvatarImage">Avatar image</string>
+    <string name="AddCustomer">Lägg till kund</string>
+    <string name="UserId">Anv. ID</string>
+    <string name="UserFullname">Namn</string>
+    <string name="Email">Email</string>
 
 </resources>

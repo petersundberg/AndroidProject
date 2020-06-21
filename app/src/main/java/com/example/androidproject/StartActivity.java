@@ -59,22 +59,25 @@ public class StartActivity extends AppCompatActivity {
     public void addCustomer(){
         Intent intentAddCustomer = new Intent(StartActivity.this, MainActivity.class);
         startActivity(intentAddCustomer);
+        Toast.makeText(this, "Lägg till kund", Toast.LENGTH_SHORT).show();
     }
 
     public void viewAllCustomers(){
         Intent intentViewAllCustomers = new Intent(StartActivity.this, AllCustomersActivity.class);
         startActivity(intentViewAllCustomers);
+        Toast.makeText(this, "Alla kunder ...", Toast.LENGTH_SHORT).show();
     }
 
     public void gotoApi(){
-        Toast.makeText(this, "Skapa API ...", Toast.LENGTH_SHORT).show();
         Intent intentAPI = new Intent(StartActivity.this, ApiActivity.class);
         startActivity(intentAPI);
+        Toast.makeText(this, "Skapa API ...", Toast.LENGTH_SHORT).show();
     }
 
     public void aboutApp(){
         Intent intentAboutApp = new Intent(StartActivity.this, AboutActivity.class);
         startActivity(intentAboutApp);
+        Toast.makeText(this, "Om appen ...", Toast.LENGTH_SHORT).show();
     }
 
 }

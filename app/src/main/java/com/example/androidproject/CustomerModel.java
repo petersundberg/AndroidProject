@@ -8,8 +8,6 @@ public class CustomerModel {
     private boolean isActive;
 
     //Constructors
-
-
     public CustomerModel(int id, String name, int age, boolean isActive) {
         this.id = id;
         this.name = name;

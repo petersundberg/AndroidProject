@@ -30,8 +30,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL(createTableStatement);
     }
 
-    //This "onUpgrade" is called if the database version number changes.
-    // It prevents previous users apps from breaking when you change the database design.
+    //This "onUpgrade" is called if the database version number changes. It prevents previous users apps from breaking when you change the database design.
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
@@ -95,7 +94,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-
+    //update chosen customer
     public void updateCustomer(CustomerModel customerToUpdate){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -147,31 +146,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public List<CustomerModel> getAllCustomersName(){
         List<CustomerModel> returnList = new ArrayList<>();
 
-        //get data from database
-        //String queryString = "SELECT * FROM " + CUSTOMER_TABLE;
-        //String queryNameString = "SELECT COLUMN_CUSTOMER_NAME FROM " + CUSTOMER_TABLE;
-        //String queryNameString = "SELECT * FROM " + CUSTOMER_TABLE + COLUMN_CUSTOMER_NAME;
-        //String queryNameString = "DELETE FROM " + CUSTOMER_TABLE + " WHERE " + COLUMN_ID + " = " + customerModel.getName();
-        //String queryNameString = "SELECT * FROM COLUMN_CUSTOMER_NAME " + CUSTOMER_TABLE;
-        //String queryNameString = "SELECT * FROM " + CUSTOMER_TABLE + " COLUMN_CUSTOMER_NAME";
         String queryNameString =  "SELECT CUSTOMER_NAME FROM " + CUSTOMER_TABLE;
 
-
-    //String queryNameString = "SELECT * FROM " + CUSTOMER_TABLE + " WHERE " + COLUMN_CUSTOMER_NAME;      //String queryNameString = "SELECT * FROM " + CUSTOMER_TABLE + " WHERE " + COLUMN_CUSTOMER_NAME;
-        //String queryNameString = "SELECT FROM " + CUSTOMER_TABLE + " WHERE " + COLUMN_CUSTOMER_NAME + " = " + customerModel.getId();
-        //String queryNameString = "SELECT * FROM  " + CUSTOMER_TABLE WHERE category =" + vg;
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(queryNameString, null);
         if(cursor.moveToFirst()){
             //loop through cursor result, create new object, put it into returnList
-            do{
-                //int customerID = cursor.getInt(0);  // int position in table: 0
-                String customerName = cursor.getString(1);  // String position in table: 1
-                //int customerAge = cursor.getInt(2); // int position in table: 2
-                //boolean customerActive = cursor.getInt(3) == 1 ? true: false; // boolean (int) position in table: 3
 
-                CustomerModel newCustomer = new CustomerModel(customerName);   //CustomerModel newCustomer = new CustomerModel(customerID, customerName, customerAge, customerActive);
+            do{
+                String customerName = cursor.getString(1);  // String position in table: 1
+
+                CustomerModel newCustomer = new CustomerModel(customerName);
                 returnList.add(newCustomer);
 
             }while (cursor.moveToNext());
@@ -186,10 +172,49 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    //Hämta user via id
-
 
 }
+
+
+
+
+
+
+
+//    //create list out of all users
+//    public List<UserModel> getAllUsers(){
+//        List<UserModel> returnList = new ArrayList<>();
+//
+//        //get data from database
+//        String queryString = "SELECT * FROM " + CUSTOMER_TABLE;
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//        Cursor cursor = db.rawQuery(queryString, null);
+//        if(cursor.moveToFirst()){
+//            //loop through cursor result, create new object, put it into returnList
+//            do{
+//                int customerID = cursor.getInt(0);  // int position in table: 0
+//                String customerName = cursor.getString(1);  // String position in table: 1
+//                int customerAge = cursor.getInt(2); // int position in table: 2
+//                boolean customerActive = cursor.getInt(3) == 1 ? true: false; // boolean (int) position in table: 3
+//
+//                CustomerModel newUser = new UserModel(customerID, customerName, customerAge, customerActive);
+//                returnList.add(newUser);
+//
+//            }while (cursor.moveToNext());
+//        }
+//        else{
+//            //if it fails, don't add anything to list
+//        }
+//
+//        //close cursor and db
+//        cursor.close();
+//        db.close();
+//        return returnList;
+//    }
+
+
+
 
 
 

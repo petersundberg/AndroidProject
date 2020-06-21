@@ -35,73 +35,22 @@ public class ItemInfoActivity extends AppCompatActivity {
         tv_age = findViewById(R.id.tv_age);
         tv_active = findViewById(R.id.tv_active);
 
-
-
         //recieveTextView = findViewById(R.id.recieveTextView);
         Intent itemIntent = getIntent();
         String name = itemIntent.getStringExtra("name");
-        int ageInt = itemIntent.getIntExtra("age", 0);  //String age = itemIntent.getStringExtra("age");
-        boolean active = getIntent().getExtras().getBoolean("active");  //String active = itemIntent.getStringExtra("active");    //String active = itemIntent.getStringExtra("active");
+        int ageInt = itemIntent.getIntExtra("age", 0);
+        boolean active = getIntent().getExtras().getBoolean("active");
 
         tv_name.setText(name);
-        tv_age.setText(String.valueOf(ageInt));    //tv_age.setText(String.valueOf(age));
+        tv_age.setText(String.valueOf(ageInt));
         tv_active.setText(String.valueOf(active));
 
-
-        Toast.makeText(this, "info for: " + name, Toast.LENGTH_SHORT).show();
-
-
-        //tv_itemInfo = findViewById(R.id.tv_itemInfo);
-        //tv_itemInfo.setText("ID: " + itemInfo);
-        //Parcelable[] itemInfo = recieveIntent.getParcelableArrayExtra("item_info");  //String text = recieveIntent.getStringExtra("item_info"); //String text = recieveIntent.getStringExtra("DATA");
-        //lv_CustomerList.setText(itemInfo);
-//        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-
-
-
-//        boolean status = dataBaseHelper.showCustomerInfo((CustomerModel) customerArrayAdapter.getItem(info.position));
-//        Toast.makeText(ItemInfoActivity.this, "Raderad: " + status, Toast.LENGTH_SHORT).show();
-        //showCustomerInfo();
-
-
-
-
-       //dataBaseHelper.showCustomerOwnInfo(CustomerModel customerModel);
-
-////        private void showCustomerInfo() {
-//        dataBaseHelper = new DataBaseHelper(ItemInfoActivity.this);
-//        List<CustomerModel> customerInfo = dataBaseHelper.showCustomerInfo();
-//        customerArrayAdapter = new ArrayAdapter<CustomerModel>(ItemInfoActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper.customerInfo);
-//        lv_CustomerList.setAdapter(customerArrayAdapter);
-
-//        dataBaseHelper = new DataBaseHelper(ItemInfoActivity.this);
-//        List<CustomerModel> oneCustomerInfo = dataBaseHelper.showCustomerInfo();
-//        customerArrayAdapter = new ArrayAdapter<CustomerModel>(ItemInfoActivity.this, android.R.layout.simple_list_item_1, oneCustomerInfo);
-//        updateListData();
-
-
-//    }
-
-
-
-//    dataBaseHelper = new DataBaseHelper(AllCustomersActivity.this);
-//    List<CustomerModel> allCustomers = dataBaseHelper.getAllCustomers();
-//    customerArrayAdapter = new ArrayAdapter<CustomerModel>(AllCustomersActivity.this, android.R.layout.simple_list_item_1, allCustomers);
-//    updateListData();
-
+        Toast.makeText(this, "Info för: " + name, Toast.LENGTH_SHORT).show();
 
     }
-
-//        private void showCustomerInfo() {
-//        customerArrayAdapter = new ArrayAdapter<CustomerModel>(this, android.R.layout.simple_list_item_1, dataBaseHelper.showCustomerInfo());
-//        lv_CustomerList.setAdapter(customerArrayAdapter);
-//
-//    }
-
 
     private void updateListData() {
         lv_CustomerList.setAdapter(customerArrayAdapter);
     }
-
 
 }
