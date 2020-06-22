@@ -11,7 +11,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.squareup.picasso.Picasso;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -34,6 +37,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ApiActivity extends AppCompatActivity  implements View.OnClickListener {
+
+
+//--------------------------------------------------------
+
+    private static final String TAG = "ApiActivity";
+
+//--------------------------------------------------------
 
     private Button btn_get,btn_post,btn_put,btn_delete;
     private TextView tv_api_result;
@@ -75,6 +85,16 @@ public class ApiActivity extends AppCompatActivity  implements View.OnClickListe
         btn_put.setOnClickListener(this);
         btn_delete.setOnClickListener(this);
 
+
+//--------------------------------------------------------------
+        //restore state, from landscape mode
+        if(savedInstanceState != null) {
+            String savedStateText = savedInstanceState.getString("apiStringData");
+            tv_api_result.setText(savedStateText);  //restore state for TextView "tv_api_result"
+
+        }
+//--------------------------------------------------------------
+
     }
 
 
@@ -87,6 +107,8 @@ public class ApiActivity extends AppCompatActivity  implements View.OnClickListe
         adp = new ArrayAdapter(this, android.R.layout.simple_list_item_1,userArrayList);
         lv_api.setAdapter(adp);
     }
+
+
 
 
     @Override
@@ -159,6 +181,7 @@ public class ApiActivity extends AppCompatActivity  implements View.OnClickListe
 
                     VolleyNetwork.getInstance(this.getApplicationContext()).addToRequestQueue(myPostReq);
 
+
                 } catch (JSONException e){
                     e.printStackTrace();
                 }
@@ -187,6 +210,7 @@ public class ApiActivity extends AppCompatActivity  implements View.OnClickListe
                     });
 
                     VolleyNetwork.getInstance(this.getApplicationContext()).addToRequestQueue(myPutReq);
+
                 }
                 catch (JSONException e){
                     e.printStackTrace();
@@ -238,6 +262,7 @@ public class ApiActivity extends AppCompatActivity  implements View.OnClickListe
 
                     dialogBuilder.setView(dialogView);
 
+
                     //Declare views in dialog
                     final ImageView dialog_user_avatar;
                     final TextView dialog_user_id;
@@ -258,10 +283,25 @@ public class ApiActivity extends AppCompatActivity  implements View.OnClickListe
 
                     final AlertDialog updateDialog = dialogBuilder.create();
                     updateDialog.show();
+                    updateDialog.getWindow().setLayout(800,900);
+
 
             }
             return super.onContextItemSelected(item);
         }
+
+
+
+        //save state, for landscape mode
+        @Override
+        protected void onSaveInstanceState(@NonNull Bundle outState) {
+            super.onSaveInstanceState(outState);
+
+            outState.putString("apiStringData", tv_api_result.getText().toString()); //save state for TextView "tv_api_result"
+
+        }
+
+
 
 }
 

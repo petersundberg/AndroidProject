@@ -70,7 +70,7 @@
         android:id="@+id/tv_api_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:text="@string/APIResult"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,15 +81,15 @@
     <ListView
         android:id="@+id/lv_api"
 
-        android:layout_width="384dp"
-        android:layout_height="345dp"
+        android:layout_width="386dp"
+        android:layout_height="157dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_api_result"
-        app:layout_constraintVertical_bias="0.522" />
+        app:layout_constraintVertical_bias="0.387" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
