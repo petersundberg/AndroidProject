@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView lv_CustomerList;
     private ArrayAdapter customerArrayAdapter;
     private DataBaseHelper dataBaseHelper;
+    private static final String MY_PREF = "SHAREDPREF";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
 
                 boolean success = dataBaseHelper.addOne(customerModel);
                 Toast.makeText(MainActivity.this, "Kund tillagd: " + success, Toast.LENGTH_SHORT).show();
+                et_Name.setText("");    //clear editText View after adding customer
+                et_Age.setText("");     //clear age View after adding customer
+                sw_Active.setChecked(false);    //set Active View to false after adding customer
+                et_Name.requestFocus();     //set focus to name view
 
             }
         });
@@ -84,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        loadData(); //call function to restore data to views
+        et_Name.requestFocus(); //set focus to name View
 
     }
 
@@ -133,6 +142,32 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Skapa API ...", Toast.LENGTH_SHORT).show();
         Intent intentAPI = new Intent(MainActivity.this, ApiActivity.class);
         startActivity(intentAPI);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SharedPreferences sh = getSharedPreferences(MY_PREF,MODE_PRIVATE);
+        SharedPreferences.Editor editor = sh.edit();
+
+        editor.putString("name", et_Name.getText().toString());
+        editor.putString("age", String.valueOf(et_Age.getText()));
+        editor.putBoolean("active", sw_Active.isChecked());
+        editor.apply();
+    }
+
+    public void loadData(){
+        SharedPreferences sh = getSharedPreferences(MY_PREF,MODE_PRIVATE);
+        String savedStateName = sh.getString("name","");
+        et_Name.setText(savedStateName);
+        Toast.makeText(this, "GOT: " + savedStateName, Toast.LENGTH_SHORT).show();
+
+        String savedStateAge = sh.getString("age","");
+        et_Age.setText(savedStateAge);
+
+        boolean savedStateActive = sh.getBoolean("active",false);
+        sw_Active.setChecked(savedStateActive);
     }
 
 

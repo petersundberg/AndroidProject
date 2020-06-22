@@ -283,7 +283,7 @@ public class ApiActivity extends AppCompatActivity  implements View.OnClickListe
 
                     final AlertDialog updateDialog = dialogBuilder.create();
                     updateDialog.show();
-                    updateDialog.getWindow().setLayout(800,900);
+                    updateDialog.getWindow().setLayout(800,900); //set size of dialog
 
 
             }
