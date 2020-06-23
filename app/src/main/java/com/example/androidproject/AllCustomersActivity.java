@@ -31,6 +31,7 @@ public class AllCustomersActivity extends AppCompatActivity {
         private Switch sw_Active;
         private Button btn_ViewAll;
         private Button btn_Add;
+        private Button btn_Start;
         private ListView lv_CustomerList;
         private ArrayAdapter customerArrayAdapter;
         private DataBaseHelper dataBaseHelper;
@@ -41,6 +42,8 @@ public class AllCustomersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_customers);
 
             lv_CustomerList = findViewById(R.id.lv_CustomerList);
+            btn_Add = findViewById(R.id.btn_Add);
+            btn_Start = findViewById(R.id.btn_Start);
             registerForContextMenu(lv_CustomerList);   //register context menu to listView
 
 
@@ -49,9 +52,33 @@ public class AllCustomersActivity extends AppCompatActivity {
             List<CustomerModel> allCustomers = dataBaseHelper.getAllCustomers();
             customerArrayAdapter = new ArrayAdapter<CustomerModel>(AllCustomersActivity.this, android.R.layout.simple_list_item_1, allCustomers);
             updateListData();
-            //Toast.makeText(MainActivity.this, allCustomers.toString(), Toast.LENGTH_SHORT).show();
+
+
+            //set listener on btn_Add and go to activity to add new customer
+            btn_Add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent addNewCustomer = new Intent(AllCustomersActivity.this, MainActivity.class);
+                    startActivity(addNewCustomer);
+
+                }
+            });
+
+            //set listener on btn_Start (go to StartActivity)
+            btn_Start.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent goToStartActivity = new Intent(AllCustomersActivity.this, StartActivity.class);
+                    startActivity(goToStartActivity);
+
+                }
+            });
+
+
 
         }
+
+
 
         //update list
         private void updateListData() {
@@ -65,11 +92,6 @@ public class AllCustomersActivity extends AppCompatActivity {
         }
 
 
-//        private void showCustomerInfo() {
-//            customerArrayAdapter = new ArrayAdapter<CustomerModel>(this, android.R.layout.simple_list_item_1, dataBaseHelper.showCustomerInfo());
-//            lv_CustomerList.setAdapter(customerArrayAdapter);
-//        }
-
 
         private void getAllCustomersNameToListView() {
             customerArrayAdapter = new ArrayAdapter<CustomerModel>(this, android.R.layout.simple_list_item_1, dataBaseHelper.getAllCustomersName());
@@ -77,43 +99,6 @@ public class AllCustomersActivity extends AppCompatActivity {
         }
 
 
-
-        //create ActionBar menu in activity
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
-            getMenuInflater().inflate(R.menu.action_bar_menu, menu);
-            return true;
-        }
-        // create action for each item in ActionBar
-        @Override
-        public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-            switch(item.getItemId()) {
-                case R.id.about:
-                    aboutApp();
-                    return(true);
-                case R.id.api:
-                    createAPI();
-                    return(true);
-                case R.id.exit:
-                    Toast.makeText(this, "Avslutar app ...", Toast.LENGTH_SHORT).show();
-                    finish();
-                    //return(true);
-            }
-            return(super.onOptionsItemSelected(item));
-        }
-
-
-        //show About activity
-        public void aboutApp(){
-            Intent intentAboutApp = new Intent(AllCustomersActivity.this, AboutActivity.class);
-            startActivity(intentAboutApp);
-        }
-        //show activity to create API
-        public void createAPI(){
-            Toast.makeText(this, "Skapa API ...", Toast.LENGTH_SHORT).show();
-            Intent intentAPI = new Intent(AllCustomersActivity.this, ApiActivity.class);
-            startActivity(intentAPI);
-        }
 
 
         //create context menu
@@ -130,9 +115,6 @@ public class AllCustomersActivity extends AppCompatActivity {
             switch (item.getItemId()) {
 
                 case R.id.item_info:
-                    //Toast.makeText(AllCustomersActivity.this, "Visar info: " + dataBaseHelper, Toast.LENGTH_SHORT).show();
-                    //final AdapterView.OnItemClickListener onItemClick = new AdapterView.OnItemClickListener(){
-
                     CustomerModel customer = dataBaseHelper.showCustomerInfo((CustomerModel) customerArrayAdapter.getItem(info.position));
 
                     Intent itemIntent = new Intent(AllCustomersActivity.this, ItemInfoActivity.class);
@@ -150,8 +132,6 @@ public class AllCustomersActivity extends AppCompatActivity {
                     Toast.makeText(AllCustomersActivity.this, "Kund borttagen: " + status, Toast.LENGTH_SHORT).show();
                     showCustomersOnListView();
                     break;
-                //customerArrayAdapter.remove(customerArrayAdapter.getItem(info.position));
-                //updateAutoCompView();
 
 //--------------------------------------------
                 //edit chosen item
@@ -159,7 +139,7 @@ public class AllCustomersActivity extends AppCompatActivity {
                     AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
 
                     LayoutInflater inflater = getLayoutInflater();
-                    View dialogView = inflater.inflate(R.layout.edit_dialog,null);
+                    final View dialogView = inflater.inflate(R.layout.edit_dialog,null);
 
                     dialogBuilder.setView(dialogView);
 
@@ -197,11 +177,11 @@ public class AllCustomersActivity extends AppCompatActivity {
                             tempCustomer.setActive(dialog_sw_active.isChecked());
 
                             dataBaseHelper.updateCustomer(tempCustomer);
-                            Toast.makeText(AllCustomersActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AllCustomersActivity.this, "Uppdaterad", Toast.LENGTH_SHORT).show();
                             showCustomersOnListView();
 
                             updateDialog.hide();
-                            //updateAutoCompView();
+
                         }
                     });
 

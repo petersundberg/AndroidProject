@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
                 try{
                     customerModel = new CustomerModel(-1, et_Name.getText().toString(), Integer.parseInt(et_Age.getText().toString()), sw_Active.isChecked());
-                    //Toast.makeText(MainActivity.this, customerModel.toString(), Toast.LENGTH_SHORT).show();
+
                 }
                 catch (Exception e){
                     Toast.makeText(MainActivity.this, "Något blev fel ...", Toast.LENGTH_SHORT).show();
@@ -107,48 +107,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //ActionBar menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.action_bar_menu, menu);
-        return true;
-    }
-    // create action for each item in ActionBar
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.about:
-                aboutApp();
-                return(true);
-            case R.id.api:
-                createAPI();
-                return(true);
-            case R.id.exit:
-                Toast.makeText(this, "Avslutar app ...", Toast.LENGTH_SHORT).show();
-                finish();
-                //return(true);
-        }
-        return(super.onOptionsItemSelected(item));
-    }
-
-
-    //show activity with info about this app
-    public void aboutApp(){
-        Intent intentAboutApp = new Intent(MainActivity.this, AboutActivity.class);
-        startActivity(intentAboutApp);
-    }
-    //show activity to create API
-    public void createAPI(){
-        Toast.makeText(this, "Skapa API ...", Toast.LENGTH_SHORT).show();
-        Intent intentAPI = new Intent(MainActivity.this, ApiActivity.class);
-        startActivity(intentAPI);
-    }
 
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        SharedPreferences sh = getSharedPreferences(MY_PREF,MODE_PRIVATE);
+        SharedPreferences sh = getSharedPreferences(MY_PREF, MODE_PRIVATE);
         SharedPreferences.Editor editor = sh.edit();
 
         editor.putString("name", et_Name.getText().toString());
@@ -158,10 +122,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadData(){
-        SharedPreferences sh = getSharedPreferences(MY_PREF,MODE_PRIVATE);
+        SharedPreferences sh = getSharedPreferences(MY_PREF, MODE_PRIVATE);
         String savedStateName = sh.getString("name","");
         et_Name.setText(savedStateName);
-        Toast.makeText(this, "GOT: " + savedStateName, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "GOT: " + savedStateName, Toast.LENGTH_SHORT).show();
 
         String savedStateAge = sh.getString("age","");
         et_Age.setText(savedStateAge);

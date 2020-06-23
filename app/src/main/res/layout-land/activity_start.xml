@@ -17,7 +17,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.713"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_view_all_customers" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_view_all_customers"
+        android:background="@drawable/button_selector"/>
 
     <Button
         android:id="@+id/btn_api"
@@ -29,7 +30,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.274"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_add_customer" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_add_customer"
+        android:background="@drawable/button_selector"/>
 
     <Button
         android:id="@+id/btn_view_all_customers"
@@ -41,7 +43,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.713"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_what_to_do" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_what_to_do"
+        android:background="@drawable/button_selector"/>
 
     <Button
         android:id="@+id/btn_add_customer"
@@ -53,7 +56,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.274"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_what_to_do" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_what_to_do"
+        android:background="@drawable/button_selector"/>
 
     <TextView
         android:id="@+id/textView4"

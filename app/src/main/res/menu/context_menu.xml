@@ -3,14 +3,14 @@
 
     <item
         android:id="@+id/item_info"
-        android:title="Visa info" />
+        android:title="@string/ContextMenuShowInfo" />
 
     <item
         android:id="@+id/delete_item"
-        android:title="Ta bort från lista" />
+        android:title="@string/ContextMenuDelete" />
 
     <item
         android:id="@+id/edit_item"
-        android:title="Redigera" />
+        android:title="@string/ContextMenuUpdate" />
 
 </menu>

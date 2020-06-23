@@ -18,7 +18,7 @@
     <string name="ViewAllCustomers">Visa alla kunder</string>
     <string name="Api">API</string>
     <string name="AboutTheApp">Om denna app</string>
-    <string name="Welcome">Välkommen</string>
+    <string name="Welcome">Välkommen!</string>
     <string name="WhatToDo">Vad vill du göra?</string>
     <string name="AllCustomers">Alla kunder</string>
     <string name="ItemInfo">Kundinfo</string>
@@ -36,5 +36,15 @@
     <string name="UserId">Anv. ID</string>
     <string name="UserFullname">Namn</string>
     <string name="Email">Email</string>
+    <string name="AddNewCustomer">Lägg till</string>
+    <string name="DialogEditName">Uppdatera namn</string>
+    <string name="ActionBarAbout">Om</string>
+    <string name="ActionBarAPI">API</string>
+    <string name="ActionBarExit">Avsluta app</string>
+    <string name="ContextMenuShowInfo">Visa info</string>
+    <string name="ContextMenuDelete">Ta bort från lista</string>
+    <string name="ContextMenuUpdate">Uppdatera</string>
+    <string name="UserContextMenuShowDetails">Visa detaljer</string>
+    <string name="GoToStartActivity">Hem</string>
 
 </resources>

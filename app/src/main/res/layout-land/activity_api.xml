@@ -81,7 +81,7 @@
     <ListView
         android:id="@+id/lv_api"
 
-        android:layout_width="386dp"
+        android:layout_width="530dp"
         android:layout_height="157dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"

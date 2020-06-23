@@ -1,9 +1,12 @@
 package com.example.androidproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -79,5 +82,50 @@ public class StartActivity extends AppCompatActivity {
         startActivity(intentAboutApp);
         Toast.makeText(this, "Om appen ...", Toast.LENGTH_SHORT).show();
     }
+
+
+
+
+    //ActionBar menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.action_bar_menu, menu);
+        return true;
+    }
+    // create action for each item in ActionBar
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.about:
+                aboutApp_FromActionBar();
+                return(true);
+            case R.id.api:
+                createAPI();
+                return(true);
+            case R.id.exit:
+                Toast.makeText(this, "Avslutar app ...", Toast.LENGTH_SHORT).show();
+                finish();
+                //return(true);
+        }
+        return(super.onOptionsItemSelected(item));
+    }
+
+
+    //show activity with info about this app
+    public void aboutApp_FromActionBar(){
+        Intent intentAboutApp = new Intent(StartActivity.this, AboutActivity.class);
+        startActivity(intentAboutApp);
+    }
+    //show activity to create API
+    public void createAPI(){
+        Toast.makeText(this, "Skapa API ...", Toast.LENGTH_SHORT).show();
+        Intent intentAPI = new Intent(StartActivity.this, ApiActivity.class);
+        startActivity(intentAPI);
+    }
+
+
+
+
+
 
 }

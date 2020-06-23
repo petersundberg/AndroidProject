@@ -3,11 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/about" android:icon="@android:drawable/ic_dialog_info" app:showAsAction="never" android:title="Om"/>
+        android:id="@+id/about"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="@string/ActionBarAbout"
+        app:showAsAction="never" />
 
     <item
-        android:id="@+id/api" android:icon="@android:drawable/ic_dialog_info" app:showAsAction="never" android:title="API"/>
+        android:id="@+id/api"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="@string/ActionBarAPI"
+        app:showAsAction="never" />
 
     <item
-        android:id="@+id/exit"  app:showAsAction="never" android:title="Avsluta app"/>
+        android:id="@+id/exit"
+        android:title="@string/ActionBarExit"
+        app:showAsAction="never" />
 </menu>

@@ -3,6 +3,6 @@
 
     <item
         android:id="@+id/view_details"
-        android:title="Visa detaljer" />
+        android:title="@string/UserContextMenuShowDetails" />
 
 </menu>
